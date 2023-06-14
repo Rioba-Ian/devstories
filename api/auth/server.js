@@ -6,10 +6,12 @@ const cors = require("cors");
 const userRoutes = require("./src/routes/user");
 const errorHandler = require("./src/utils/errorHandler");
 const loginRoutes = require("./src/routes/auth");
+const { requestLogger, errorLogger } = require("./src/utils/logger");
 
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(requestLogger);
 
 // requests
 app.use(userRoutes);
@@ -25,6 +27,7 @@ app.use(
     origin: ["http://localhost:3000"],
   })
 );
+app.use(errorLogger);
 
 app.listen(process.env.PORT, () => {
   console.log("App listening on port 3000");

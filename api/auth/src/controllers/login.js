@@ -27,7 +27,6 @@ const login = asyncHandler(async (req, res, next) => {
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
-
     // Passwords match, login successful
     res.json({ ...user, access_token: token });
   } catch (error) {
