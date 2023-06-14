@@ -7,7 +7,6 @@ const hashPassword = async (password) => {
     .hash(password, saltRounds)
     .then((hash) => {
       hashedPass = hash;
-    //   console.log("Hash ", hashedPass);
     })
     .catch((err) => console.error(err.message));
 

@@ -5,7 +5,6 @@ const asyncHandler = require("express-async-handler");
 const createUser = asyncHandler(async (request, response, next) => {
   const { first_name, last_name, email, password } = request.body;
   let hashedPassword = await hash(password);
-  console.log(hashedPassword);
 
   pool
     .query(

@@ -1,8 +1,7 @@
 const winston = require("winston");
 const path = require("path");
 
-const logDirectory = "./src/logs"
-console.log(logDirectory);
+const logDirectory = "./src/logs";
 // Configure the logger
 const logger = winston.createLogger({
   transports: [
@@ -31,8 +30,8 @@ function requestLogger(req, res, next) {
 // Middleware to log errors
 function errorLogger(err, req, res, next) {
   logger.error("Error:", err);
-  console.log("Error:", err);
+  console.log("Error:", err.message ? error.message : error.detail);
   next(err);
 }
 
-module.exports = { requestLogger, errorLogger };
+module.exports = { requestLogger, errorLogger, logger };

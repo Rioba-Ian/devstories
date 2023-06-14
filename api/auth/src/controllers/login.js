@@ -28,7 +28,8 @@ const login = asyncHandler(async (req, res, next) => {
       return res.status(401).json({ error: "Invalid username or password" });
     }
     // Passwords match, login successful
-    res.json({ ...user, access_token: token });
+    const { password: pass, ...userWithoutPassword } = user;
+    res.json({ ...userWithoutPassword, access_token: token });
   } catch (error) {
     next(error);
   }
