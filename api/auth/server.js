@@ -1,11 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./utils/connection");
-const colors = require("colors")
+const connectDB = require("./src/utils/connection");
+const colors = require("colors");
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
+
+// middlewares
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({ message: "hello world" });
