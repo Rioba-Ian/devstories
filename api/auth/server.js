@@ -4,28 +4,25 @@ const connectDB = require("./src/utils/connection");
 const colors = require("colors");
 const cors = require("cors");
 const userRoutes = require("./src/routes/user");
+const errorHandler = require("./src/utils/errorHandler");
 
 dotenv.config();
-
 const app = express();
+app.use(express.json());
+
+// requests
+app.use(userRoutes);
+
+// connection to the BD
+connectDB();
 
 // middlewares
+app.use(errorHandler);
 app.use(
   cors({
     origin: ["http://localhost:3000"],
   })
 );
-app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.json({ message: "hello world" });
-});
-
-// connection to the BD
-connectDB();
-
-// requests
-app.use(userRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log("App listening on port 3000");
