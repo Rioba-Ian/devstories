@@ -5,6 +5,7 @@ const colors = require("colors");
 const cors = require("cors");
 const userRoutes = require("./src/routes/user");
 const errorHandler = require("./src/utils/errorHandler");
+const loginRoutes = require("./src/routes/auth");
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // requests
 app.use(userRoutes);
+app.use(loginRoutes);
 
 // connection to the BD
 connectDB();

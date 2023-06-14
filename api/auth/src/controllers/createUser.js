@@ -9,13 +9,12 @@ const createUser = asyncHandler(async (request, response, next) => {
 
   pool
     .query(
-      "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+      "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING id, first_name, last_name, email, created_at, updated_at",
       [first_name, last_name, email, hashedPassword]
     )
     .then((result) => {
-      // Process the query result
-      const { password, ...userWithoutPassword } = result.rows[0];
-      response.status(201).json(userWithoutPassword);
+      const user = result.rows[0];
+      response.status(201).json(user);
     })
     .catch((err) => {
       // Handle the error
