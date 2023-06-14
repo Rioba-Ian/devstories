@@ -3,7 +3,6 @@ const pool = require("../utils/query");
 const asyncHandler = require("express-async-handler");
 
 const createUser = asyncHandler(async (request, response, next) => {
-    
   const { first_name, last_name, email, password } = request.body;
   let hashedPassword = await hash(password);
   console.log(hashedPassword);
@@ -15,7 +14,8 @@ const createUser = asyncHandler(async (request, response, next) => {
     )
     .then((result) => {
       // Process the query result
-      response.status(201).json(result.rows[0]);
+      const { password, ...userWithoutPassword } = result.rows[0];
+      response.status(201).json(userWithoutPassword);
     })
     .catch((err) => {
       // Handle the error

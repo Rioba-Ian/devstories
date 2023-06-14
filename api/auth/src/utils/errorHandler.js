@@ -1,7 +1,6 @@
 const errorHandler = (error, req, res, next) => {
   let errStatus;
   let errMsg;
-  console.log("error new", error);
   // Handle specific PostgreSQL errors
   if (error.code === "23505") {
     // Unique constraint violation
