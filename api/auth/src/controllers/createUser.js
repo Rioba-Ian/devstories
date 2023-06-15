@@ -2,6 +2,9 @@ const hash = require("../utils/hashPassword");
 const pool = require("../utils/query");
 const asyncHandler = require("express-async-handler");
 
+// recieve rabbitmq message queuer
+const messageService = require("../services/messageService");
+
 const createUser = asyncHandler(async (request, response, next) => {
   const { first_name, last_name, email, password } = request.body;
   let hashedPassword = await hash(password);
@@ -14,6 +17,7 @@ const createUser = asyncHandler(async (request, response, next) => {
     .then((result) => {
       const user = result.rows[0];
       response.status(201).json(user);
+      messageService.sendMessage("user-service-queue", user, next);
     })
     .catch((err) => {
       // Handle the error
