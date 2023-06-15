@@ -1,15 +1,17 @@
 const pool = require("../utils/query");
-
 const asyncHandler = require("express-async-handler");
 const deleteUser = asyncHandler(async (req, res, next) => {
+  const userId = req.params.id;
+
   try {
-    const userId = req.params.id;
-    const result = await pool.query("DELETE FROM users WHERE id = $1", [
-      userId,
-    ]);
-    res.status(204).json({ message: "User deleted successfully" });
-  } catch (err) {
-    next(err);
+    const query = "DELETE FROM users WHERE id = $1";
+    const values = [userId];
+
+    await pool.query(query, values);
+
+    res.status(204).send("User deleted successfully");
+  } catch (error) {
+    next(error);
   }
 });
 
