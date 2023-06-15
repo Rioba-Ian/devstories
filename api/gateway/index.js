@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/", proxy("http://localhost:3000"));
-app.use("/articles", proxy("http://localhost:3001"));
+app.use("/articles", proxy("http://localhost:4000"));
 app.use("/roadmap", proxy("http://localhost:3002"));
 
 // Create a global RabbitMQ connection variable
