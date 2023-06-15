@@ -15,7 +15,7 @@ app.use("/roadmap", proxy("http://localhost:3002"));
 let rabbitMQConnection;
 
 async function startServer() {
-  rabbitMQConnection = await rabbitMQ();
+  rabbitMQConnection = await rabbitMQ.createRabbitMQConnection();
 
   if (!rabbitMQConnection) {
     console.log("Exiting...");

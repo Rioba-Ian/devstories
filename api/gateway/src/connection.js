@@ -12,4 +12,4 @@ async function createRabbitMQConnection() {
   }
 }
 
-module.exports = createRabbitMQConnection;
+module.exports = { createRabbitMQConnection };
