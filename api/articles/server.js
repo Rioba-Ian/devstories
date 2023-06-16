@@ -5,6 +5,7 @@ const articleRoutes = require("./src/routes/article");
 const connectDB = require("./src/utils/connection");
 const colors = require("colors");
 const errorHandler = require("./src/utils/errorHandler");
+const commentRoutes = require("./src/routes/comments");
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cors());
 
 // routes
 app.use(articleRoutes);
+app.use(commentRoutes);
 
 // errorHandler
 app.use(errorHandler);

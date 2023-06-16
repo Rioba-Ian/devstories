@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
-const Article = require("../models/Article");
+const Article = require("../../models/Article");
 
 // rabbit service
-const startConsuming = require("../services/recieveMessage");
+const { startConsuming } = require("../../services/recieveMessage");
 
 let author;
 function handleMessage(user) {
@@ -10,10 +10,10 @@ function handleMessage(user) {
   return user;
 }
 
-startConsuming("user-service-queue", handleMessage);
-
 const createArticle = asyncHandler(async (req, res, next) => {
   const { title, body, hidden, comments, meta } = req.body;
+
+  startConsuming("user-service-queue", handleMessage);
 
   try {
     const article = new Article({

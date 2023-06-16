@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 const ArticleSchema = new Schema(
   {
     title: String,
-    author: {},
+    author: { type: {}, required: true },
     body: String,
-    comments: [{ body: String, date: Date }],
+    comments: [{ body: String, date: { type: Date, default: Date.now } }],
     date: { type: Date, default: Date.now },
     hidden: Boolean,
     meta: {
