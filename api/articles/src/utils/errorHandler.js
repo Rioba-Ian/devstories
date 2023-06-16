@@ -1,5 +1,3 @@
-const { logger } = require("./logger");
-
 const errorHandler = (error, req, res, next) => {
   let errStatus;
   let errMsg;
@@ -21,9 +19,8 @@ const errorHandler = (error, req, res, next) => {
     success: false,
     status: errStatus,
     message: errMsg,
-    stack: error.stack
+    stack: process.env.NODE_ENV === "development" ? err?.stack : {},
   });
-  logger.error("Error:", error);
 };
 
 module.exports = errorHandler;
