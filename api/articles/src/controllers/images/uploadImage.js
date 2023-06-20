@@ -37,8 +37,6 @@ const uploadImage = asyncHandler(async (req, res, next) => {
     const data = await s3Upload(params);
     const url = data.Location;
 
-    console.log("File uploaded successfully4:", url);
-
     if (url) {
       // Save to the database
       article.images.push(url);
