@@ -2,11 +2,14 @@ const asyncHandler = require("express-async-handler");
 const Article = require("../../models/Article");
 const AWS = require("aws-sdk");
 const { promisify } = require("util");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // Configure AWS credentials
 AWS.config.update({
-  accessKeyId: "AKIASAJIN3RXBSRNKWM6",
-  secretAccessKey: "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",
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey,
   region: "us-east-1",
 });
 
@@ -44,7 +47,7 @@ const uploadImage = asyncHandler(async (req, res, next) => {
     }
   } catch (error) {
     console.error("Error uploading file:", error);
-    next(error)
+    next(error);
   }
 });
 
