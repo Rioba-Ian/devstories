@@ -13,6 +13,7 @@ const ArticleSchema = new Schema(
       votes: Number,
       favs: Number,
     },
+    images: [],
     likedBy: [],
   },
   {

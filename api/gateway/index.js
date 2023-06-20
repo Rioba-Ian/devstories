@@ -1,8 +1,10 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const cors = require("cors");
 const proxy = require("express-http-proxy");
 const rabbitmqConnection = require("./src/connection");
 
+dotenv.config();
 const app = express();
 
 app.use(express.json());
