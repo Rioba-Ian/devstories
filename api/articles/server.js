@@ -16,12 +16,12 @@ const app = express();
 connectDB();
 
 // middlewares
-app.use(express.json());
-app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
 
 // routes
 app.use(articleRoutes);
